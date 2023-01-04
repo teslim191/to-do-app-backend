@@ -18,12 +18,7 @@ app.use(express.urlencoded({extended: false}))
 connectDB()
 
 
-app.use(
-  cors({
-    origin: "https://todo-app-mwb1.onrender.com",
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  })
-);
+app.use(cors());
 
 app.use('/', router)
 
