@@ -20,7 +20,7 @@ connectDB()
 
 app.use(
   cors({
-    origin: "http:localhost:5050",
+    origin: "https://todo-app-mwb1.onrender.com",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
