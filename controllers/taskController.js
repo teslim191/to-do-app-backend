@@ -8,24 +8,22 @@ export const taskController = {
     try {
       if (!task || !due_date) {
         res.status(400).json({ error: "All fields are required" });
-      } else if (due_date !== moment(new Date(due_date)).format("YYYY-MM-DD")) {
-        res.status(400).json({ error: "date format is not correct" });
       } else {
-        let dueDate = moment(new Date(due_date))
-          .format("YYYY-MM-DD")
-          .slice(0, 10);
+        let dueDate = moment(due_date,"DD/MM/YYYY").toDate()
+        let formattedDate = moment(dueDate).format("Do MMMM YYYY")
         let newTask = await Task.create({
           task,
-          due_date,
+          due_date: formattedDate,
           completed,
         });
         res.status(201).json({
           task: newTask.task,
-          due_date: dueDate,
+          due_date: newTask.due_date,
           completed: newTask.completed,
         });
       }
     } catch (error) {
+      console.log(error )
       res.status(500).json({ error: "server error" });
     }
   },
